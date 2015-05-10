@@ -62,6 +62,8 @@ for file_item in compilation_database:
     file_path = file_item["file"]
     if not platform.system() == "Windows":
         file_path = get_source_path(file_item["file"], file_item["directory"])
+    # fix for file paths with a space in it
+    file_path = file_path.replace('\\ ', ' ')
     if source_exist_at(file_path) and not file_path in source_list:
         source_list.append(file_path)
 if args.includes:
